@@ -1,6 +1,6 @@
 function Potion(name) {
 
-  this.types = ['strength', 'agility', 'health']
+  this.types = ['power', 'agility', 'health', 'mana']
 
   const randomName = this.types[Math.floor(Math.random() * this.types.length)]
   this.name = name || randomName;
