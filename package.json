@@ -1,0 +1,19 @@
+{
+  "name": "command-line-rpg",
+  "version": "1.0.0",
+  "description": "A Commnad-line RPG game where the user can face different enemies and increase health points with potions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaiasqb/command-line-rpg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isaiasqb/command-line-rpg/issues"
+  },
+  "homepage": "https://github.com/isaiasqb/command-line-rpg#readme"
+}
