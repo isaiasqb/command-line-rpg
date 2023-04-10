@@ -2,6 +2,6 @@
 A Commnad-line RPG game where the user can face different enemies and increase health points with potions.
 
 ## Explanation
-This projects is built as a practical example of how to create an application followinf the principles of:
+This project has been built as a practical example of how to  follow the principles of:
 - OOP (Object Oriented Programming)
 - TDD (Test-driven developement)
