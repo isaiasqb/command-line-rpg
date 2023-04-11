@@ -24,15 +24,34 @@ Player.prototype.getStats = function() {
     health: this.health,
     mana: this.mana,
   }
-}
+};
+
 //returns an object with player properties
 Player.prototype.getInventory = function() {
   if (this.inventory.length) {
     return this.inventory;
   }
   return false;
+};
+
+Player.prototype.getHealth = function() {
+  return `${this.name} now has ${this.health} health points`;
 }
 
+Player.prototype.isAlive = function() {
+  if(this.health === 0) {
+    return false;
+  }
+  return true;
+};
+
+Player.prototype.reduceHealth = function(health) {
+  this.health -= health;
+
+  if (this.health < 0) {
+    this.health = 0;
+  }
+};
 
 module.exports = Player;
 
