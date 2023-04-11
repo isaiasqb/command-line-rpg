@@ -53,5 +53,16 @@ Player.prototype.reduceHealth = function(health) {
   }
 };
 
+Player.prototype.getPowerValue = function() {
+  const minAttack = this.power - 5;
+  const maxAttack = this.power + 5;
+
+  return Math.floor(Math.random() * (maxAttack - minAttack) + minAttack)
+};
+
+Player.prototype.addPotion = function(potion) {
+  this.inventory.push(potion);
+};
+
 module.exports = Player;
 

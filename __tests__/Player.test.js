@@ -1,4 +1,5 @@
 const Player = require('../library/Player');
+const Potion = require('../library/Potion')
 
 test('creates a player object', () => {
   const player = new Player('Kvothe');
@@ -56,4 +57,21 @@ test("substracts points form player's health", () => {
 
   player.reduceHealth(99999);
   expect(player.health).toBe(0);
+});
+
+test("gets the player's ttack points", () => {
+  const player = new Player('Kvothe');
+  player.power = 10;
+
+  expect(player.getPowerValue()).toBeGreaterThanOrEqual(5);
+  expect(player.getPowerValue()).toBeLessThanOrEqual(15);
+});
+
+test('adds a potion to the inventory', () => {
+  const player = new Player('Dave');
+  const oldCount = player.inventory.length;
+
+  player.addPotion(new Potion());
+
+  expect(player.inventory.length).toBeGreaterThan(oldCount);
 });
