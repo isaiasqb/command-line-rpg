@@ -18,5 +18,8 @@
   "homepage": "https://github.com/isaiasqb/command-line-rpg#readme",
   "devDependencies": {
     "jest": "^29.5.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.0.0"
   }
 }
