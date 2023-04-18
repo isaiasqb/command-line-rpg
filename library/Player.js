@@ -1,6 +1,6 @@
 const Potion = require('../library/Potion');
 
-jest.mock('../library/Potion') //replaces the constructor's implementation with our faked data.
+// jest.mock('../library/Potion') //replaces the constructor's implementation with our faked data.
 
 console.log(new Potion)
 
@@ -62,6 +62,22 @@ Player.prototype.getPowerValue = function() {
 
 Player.prototype.addPotion = function(potion) {
   this.inventory.push(potion);
+};
+
+Player.prototype.usePotion = function(index) {
+  const potion = this.getInventory().splice(index, 1)[0];
+
+  switch (potion.name) {
+    case 'agility':
+      this.agility += potion.value;
+      break;
+    case 'health':
+      this.health += potion.value;
+      break;
+    case 'power':
+      this.power += potion.value;
+      break;
+  }
 };
 
 module.exports = Player;
