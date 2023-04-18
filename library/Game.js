@@ -64,7 +64,7 @@ Game.prototype.battle = function () {
       if (action === 'Use Potion') {
         if(!this.player.getInventory()) { //getInventory() method that returns false if the inventory is empty
           console.log('You have no potions in your inventory!')
-          return
+          return this.checkEndOfBattle();
         }
         inquirer
         .prompt({
@@ -80,9 +80,9 @@ Game.prototype.battle = function () {
       
           this.player.usePotion(potionDetails[0] - 1);
           console.log(`You used a ${potionDetails[1]} potion.`);
+
+          this.checkEndOfBattle();
         });
-
-
       }
       else {
         const damage = this.player.getPowerValue();
@@ -90,16 +90,30 @@ Game.prototype.battle = function () {
 
         console.log(`You attacked the evil ${this.currentEnemy.name}`);
         console.table(this.currentEnemy.getHealth())
+
+        this.checkEndOfBattle();
       }
-    })
+    });
   } else {
     const damage = this.currentEnemy.getPowerValue(); //DOUBLE check name of this function
     this.player.reduceHealth(damage)
 
     console.log(`You were attacked by the ${this.currentEnemy.name}`) 
     console.table(this.player.getHealth());
+
+    this.checkEndOfBattle
   }
-}
+};
+
+
+Game.protptype.checkEndOfBattle = function () {
+  // A turn can end if:
+  // The Player uses a Potion
+  // The Player attempts to use a Potion but has an empty inventory
+  // The Player attacks the Enemy
+  // The Enemy attacks the Player
+
+};
 
  module.exports = Game;
 
