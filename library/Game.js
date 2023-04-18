@@ -51,6 +51,49 @@ Game.prototype.startNewBattle = function () {
   this.battle()
 };
 
+
+
+Game.prototype.checkEndOfBattle = function() {
+  // A turn can end if:
+  // The Player uses a Potion
+  // The Player attempts to use a Potion but has an empty inventory
+  // The Player attacks the Enemy
+  // The Enemy attacks the Player
+
+  // if both characters are alive and can continue fighting, switch the turn order and run battle() again.
+  if(this.player.isAlive() && this.currentEnemy.isAlive()) {
+    this.isPlayerTurn = !this.isPlayerTurn;
+    this.battle()
+  }
+  // Player is still alive but Enemy has been defeated =>  the Player is awarded a Potion, and the roundNumber increases. 
+  // or there are no more enemies to fight => Player has won the overall game. 
+  // or a new battle should start.
+  else if (this.player.isAlive && !this.currentEnemy.isAlive()) {
+    console.log(`You have defeated the ${this.currentEnemy.name}`);
+
+    this.player.addPotion(this.currentEnemy.potion);
+    console.log(`${this.player.name} recovered one ${this.currentEnemy.potion.name} potion from the ${this.currentEnemy.name}'s corpse`);
+
+    this.roundNumber++;
+
+    if (this.roundNumber < this.enemies.length) {
+      this.currentEnemy = this.enemies[this.roundNumber];
+      this.startNewBattle();
+    } else {
+      console.log(`You have defeated all ${this.enemies.length} evil creatures that were lurking in the Forbidden Forest`)
+    }
+  }
+  // Player might have been defeated, marking the end of the game
+  else {
+    console.log(`You have been slain by ${this.currentEnemy.name}`)
+  }
+};
+
+ module.exports = Game;
+
+
+
+
 Game.prototype.battle = function () {
   if (this.isPlayerTurn) {
     inquirer
@@ -101,20 +144,10 @@ Game.prototype.battle = function () {
     console.log(`You were attacked by the ${this.currentEnemy.name}`) 
     console.table(this.player.getHealth());
 
-    this.checkEndOfBattle
+    this.checkEndOfBattle();
   }
 };
 
 
-Game.protptype.checkEndOfBattle = function () {
-  // A turn can end if:
-  // The Player uses a Potion
-  // The Player attempts to use a Potion but has an empty inventory
-  // The Player attacks the Enemy
-  // The Enemy attacks the Player
-
-};
-
- module.exports = Game;
 
 
