@@ -13,7 +13,7 @@ Character.prototype.getHealth = function() {
   return `${this.name}'s health is now ${this.health}!`;
 };
 
-Character.prototype.getAttackValue = function() {
+Character.prototype.getPowerValue = function() {
   const min = this.power - 5;
   const max = this.power + 5;
   

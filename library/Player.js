@@ -1,4 +1,5 @@
 const Potion = require('../library/Potion');
+const Character = require('./Character')
 
 // jest.mock('../library/Potion') //replaces the constructor's implementation with our faked data.
 
@@ -14,6 +15,11 @@ function Player (name = '') {
   //any new character must start with 2 potions in their inventory
   this.inventory = [new Potion('health'), new Potion()];
 };
+
+// inherit prototype methods from Character constructor:
+  // Using Object.create() takes all of the methods that exist on the Character() prototype 
+  //and assign them as the prototype for Player.prototype.
+Player.prototype = Object.create(Character.prototype);
 
 //returns an object with player properties
 Player.prototype.getStats = function() {
@@ -32,32 +38,6 @@ Player.prototype.getInventory = function() {
     return this.inventory;
   }
   return false;
-};
-
-Player.prototype.getHealth = function() {
-  return `${this.name} now has ${this.health} health points`;
-}
-
-Player.prototype.isAlive = function() {
-  if(this.health === 0) {
-    return false;
-  }
-  return true;
-};
-
-Player.prototype.reduceHealth = function(health) {
-  this.health -= health;
-
-  if (this.health < 0) {
-    this.health = 0;
-  }
-};
-
-Player.prototype.getPowerValue = function() {
-  const minAttack = this.power - 5;
-  const maxAttack = this.power + 5;
-
-  return Math.floor(Math.random() * (maxAttack - minAttack) + minAttack)
 };
 
 Player.prototype.addPotion = function(potion) {

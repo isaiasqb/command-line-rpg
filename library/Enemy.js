@@ -1,4 +1,5 @@
 const Potion = require('./Potion');
+const Character = require('./Character')
 
 
 function Enemy(name, weapon) {
@@ -11,35 +12,14 @@ function Enemy(name, weapon) {
   this.agility = Math.floor(Math.random() * 5 + 5);
 }
 
-
-Enemy.prototype.getHealth = function() {
-  return `${this.name} now has ${this.health} health points`;
-}
-
-Enemy.prototype.isAlive = function() {
-  if(this.health === 0) {
-    return false;
-  }
-  return true;
-};
-
-Enemy.prototype.reduceHealth = function(health) {
-  this.health -= health;
-
-  if (this.health < 0) {
-    this.health = 0;
-  }
-};
-
-Enemy.prototype.getPowerValue = function() {
-  const minAttack = this.power - 5;
-  const maxAttack = this.power + 5;
-
-  return Math.floor(Math.random() * (maxAttack - minAttack) + minAttack)
-};
+// inherit prototype methods from Character constructor:
+  // Using Object.create() takes all of the methods that exist on the Character() prototype 
+  //and assign them as the prototype for Enemy.prototype.
+Enemy.prototype = Object.create(Character.prototype);
 
 Enemy.prototype.getDescription = function() {
   return `A ${this.name} holding a ${this.weapon} has appeared!`;
 };
 
 module.exports = Enemy;
+
