@@ -2,24 +2,22 @@ const Potion = require('./Potion');
 const Character = require('./Character')
 
 
-function Enemy(name, weapon) {
-  this.name = name;
-  this.weapon = weapon;
-  this.potion = new Potion();
+class Enemy extends Character{
+  constructor(name, weapon) {
+        
+    // call parent constructor so it can be properly initialized, before adding the properties of this consructor:
+    super(name);
 
-  this.health = Math.floor(Math.random() * 10 + 85);
-  this.power = Math.floor(Math.random() * 5 + 5);
-  this.agility = Math.floor(Math.random() * 5 + 5);
-}
+    //power, agility, health and mana properties are inherited from the parent constructor Character
 
-// inherit prototype methods from Character constructor:
-  // Using Object.create() takes all of the methods that exist on the Character() prototype 
-  //and assign them as the prototype for Enemy.prototype.
-Enemy.prototype = Object.create(Character.prototype);
+    this.name = name;
+    this.weapon = weapon;
+    this.potion = new Potion();
+  }
 
-Enemy.prototype.getDescription = function() {
-  return `A ${this.name} holding a ${this.weapon} has appeared!`;
+  getDescription() {
+    return `A ${this.name} holding a ${this.weapon} has appeared!`;
+  }
 };
 
 module.exports = Enemy;
-
